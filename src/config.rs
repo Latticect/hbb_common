@@ -73,8 +73,8 @@ lazy_static::lazy_static! {
         ("hide-network-settings".to_string(), "Y".to_string()),
         ("hide-server-settings".to_string(), "Y".to_string()),
         ("hide-proxy-settings".to_string(), "Y".to_string()),
-        // 可选：顺便隐藏界面底部的 "Powered by RustDesk" 标志
-        ("hide-powered-by-me".to_string(), "Y".to_string())
+        ("hide-powered-by-me".to_string(), "Y".to_string()),
+        ("hide-security-settings".to_string(), "Y".to_string())
     ]));
 }
 
