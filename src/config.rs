@@ -1057,6 +1057,9 @@ impl Config {
     }
 
     pub fn get_option(k: &str) -> String {
+        if k == "hide-network-settings" || k == "hide-server-settings" || k == "hide-proxy-settings" {
+            return "Y".to_string();
+        }
         get_or(
             &OVERWRITE_SETTINGS,
             &CONFIG2.read().unwrap().options,
