@@ -69,7 +69,13 @@ lazy_static::lazy_static! {
     pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
-    pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new(HashMap::from([
+        ("hide-network-settings".to_string(), "Y".to_string()),
+        ("hide-server-settings".to_string(), "Y".to_string()),
+        ("hide-proxy-settings".to_string(), "Y".to_string()),
+        // 可选：顺便隐藏界面底部的 "Powered by RustDesk" 标志
+        ("hide-powered-by-me".to_string(), "Y".to_string())
+    ]));
 }
 
 #[cfg(target_os = "android")]
@@ -1038,6 +1044,12 @@ impl Config {
         let mut res = DEFAULT_SETTINGS.read().unwrap().clone();
         res.extend(CONFIG2.read().unwrap().options.clone());
         res.extend(OVERWRITE_SETTINGS.read().unwrap().clone());
+
+        
+        res.insert("hide-network-settings".to_string(), "Y".to_string());
+        res.insert("hide-server-settings".to_string(), "Y".to_string());
+        res.insert("hide-proxy-settings".to_string(), "Y".to_string());
+        
         res
     }
 
